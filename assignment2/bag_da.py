@@ -1,9 +1,9 @@
-# Name:
-# OSU Email:
+# Name: Ted Janney
+# OSU Email: janneyt@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: 2
+# Due Date: 17/4/2022
+# Description: Implements a bag adt based on a dynamic array class
 
 
 from dynamic_array import *
