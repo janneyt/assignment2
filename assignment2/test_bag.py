@@ -58,6 +58,11 @@ class MyTestCase ( unittest.TestCase ):
         self.assertFalse(bag5.equal(bag4))
         self.assertTrue(bag5.equal(bag5))
 
+    def test_iter(self):
+        bag = Bag ( [5, 4, -8, 7, 10] )
+        for item in bag:
+            print ( item )
+
 
 
 if __name__ == '__main__':
