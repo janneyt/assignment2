@@ -7,12 +7,21 @@ class MyTestCase ( unittest.TestCase ):
     def test_empty_array(self):
         da = DynamicArray()
         self.assertEqual ( da.get_capacity(),4 )
+        self.assertEqual(da._size,0)
+        da.resize(8)
+        self.assertEqual(da.get_capacity(),8)
+        self.assertEqual(da._size,0)
+        da.resize(2)
+        self.assertEqual(da.get_capacity(),2)
+        self.assertEqual(da._size,0)
+        da.resize(0)
+        self.assertEqual(da.get_capacity(),2)
+        self.assertEqual(da._size,0)
         old_data = da._data
         self.assertEqual(da._data, old_data)
         da.resize(5)
         self.assertEqual(da.get_capacity(),5)
-        with self.assertRaises(DynamicArrayException):
-            da.resize(-1)
+
 
     def test_resize_full_array(self):
         da = DynamicArray([1,2,3,4,5,6,7,8])
@@ -23,8 +32,7 @@ class MyTestCase ( unittest.TestCase ):
         da.resize(12)
         self.assertEqual(da._size,10)
         self.assertEqual(da._capacity,12)
-        with self.assertRaises(DynamicArrayException):
-            da.resize(9)
+
 
     def test_append(self):
         da = DynamicArray()
@@ -48,6 +56,9 @@ class MyTestCase ( unittest.TestCase ):
         self.assertEqual(da._data[5],None)
 
     def test_insert_at_index(self):
+        da1 = DynamicArray([300,200,100])
+        da1.insert_at_index(0,400)
+        self.assertEqual(da1.get_capacity(),4)
         da = DynamicArray()
         with self.assertRaises(DynamicArrayException):
             da.insert_at_index(1,100)

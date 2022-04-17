@@ -117,22 +117,18 @@ class DynamicArray:
         Returns the resized Dynamic Array and new Static Array
         """
 
-        if type(new_capacity) is int and new_capacity > 0 and new_capacity > self._size:
+        if type(new_capacity) is int and new_capacity > 0 and new_capacity >= self._size:
             self._capacity = new_capacity
             old_data = self._data
             self._data = StaticArray(new_capacity)
-            for values in range(0,new_capacity-1):
+            for values in range(0,new_capacity):
 
                 # Frequently the old_data is too short so we have to insert Nones
                 if values >= old_data.length():
                     self._data[values] = None
                 else:
                     self._data[values] = old_data[values]
-        elif type(new_capacity) is int and new_capacity == 0 and self._size == 0:
-            self._capacity = new_capacity
-            self._data = StaticArray(1)
-        else:
-            raise DynamicArrayException
+
 
     def append(self, value: object) -> None:
         """
@@ -173,7 +169,7 @@ class DynamicArray:
         self._size += 1
 
         # Check the capacity before adding an element
-        if self._capacity <= self._size:
+        if self._capacity < self._size:
             self.resize(2*self._capacity)
         if self._size < 1 and index == 0:
             self[index] = value
@@ -200,13 +196,13 @@ class DynamicArray:
             change = value
 
             # Switch variables in range (index,N-1) to avoid index bounds problems
-            for num in range ( index, self._data.length () - 1 ):
+            for num in range ( index, self._data.length () -1 ):
                 self._data[num] = change
                 change = temp
                 temp = self._data[num + 1]
 
             # Finish the last value's switch for index reasons
-            self._data[num + 1] = change
+            self._data[self._data.length()-1] = change
 
     def remove_at_index(self, index: int) -> None:
         """
