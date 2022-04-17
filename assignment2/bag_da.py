@@ -44,33 +44,59 @@ class Bag:
 
     def add(self, value: object) -> None:
         """
-        TODO: Write this implementation
+        Adds a value to the bag.
         """
-        pass
+        self._da.append(value)
 
     def remove(self, value: object) -> bool:
         """
-        TODO: Write this implementation
+        Removes a value from the bag.
         """
-        pass
+        first = True
+        for num in range(0, self.size()-1):
+            if self._da[num] == value and first:
+                self._da.remove_at_index(num)
+                first = False
+
+        if not first:
+            return True
+        return False
 
     def count(self, value: object) -> int:
         """
-        TODO: Write this implementation
+        Counts the number of times an element occurs in the bag.
         """
-        pass
+        count = 0
+        for num in range(0,self.size()):
+            if self._da[num] == value:
+                count += 1
+
+        return count
 
     def clear(self) -> None:
         """
-        TODO: Write this implementation
+        Clears a bag by setting it equal to a new, empty DynamicArray
         """
-        pass
+        self._da = DynamicArray()
 
     def equal(self, second_bag: "Bag") -> bool:
         """
-        TODO: Write this implementation
+        Tests whether the contents of second_bag is equal to the original bag
         """
-        pass
+        if self._da.is_empty() and second_bag._da.is_empty():
+            return True
+        elif self.size() == second_bag.size():
+            found = False
+            for num in range(self.size()):
+                found = False
+                for nums in range(second_bag.size()):
+                    if self._da[num] == second_bag._da[nums]:
+                        found = True
+                if not found:
+                    return False
+            if found:
+                return True
+        return False
 
     def __iter__(self):
         """
